@@ -42,9 +42,9 @@ Exit/Logout
 
 ###############################################
 Movie ==== <  Review >==== User
-				II
-				^
-			Comment
+			    ||
+			    ^
+		      Comment
 ###############################################
 Movies Table
 Title: string
