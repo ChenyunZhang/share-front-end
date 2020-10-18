@@ -3,9 +3,9 @@ import { Route, Switch, Link, NavLink }  from "react-router-dom";
 
 function Navbar() {
     return (
-        <nav class="navbar custom-color">
-            <div class="container-fluid">
-                <ul class="nav navbar-nav navbar-right">
+        <nav className="navbar custom-color">
+            <div className="container-fluid">
+                <ul className="nav navbar-nav navbar-right">
                 <li><Link to="/login" className="navBar-login-Text">LOGIN/SIGNUP</Link></li>
                 </ul>
             </div>
