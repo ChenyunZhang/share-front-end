@@ -8,6 +8,7 @@
 
 #Global,
 #Global-2 {
+  /* infinity */
   animation: arm 1.5s linear infinite;
   transform-origin: center;
   transform-box: fill-box;
@@ -209,4 +210,27 @@ button.ghost {
 
 li .navBar-login-Text {
   font-size: 15px;
+}
+
+.login-error {
+  color: #d8000c;
+  /* background: #ffd2d2; */
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  /* margin:10px 22px; */
+  /* font-size: 1em; */
+  margin: 1vh;
+  vertical-align: middle;
+}
+
+.navbar-custom {
+  background-color: #cbb6d4;
+}
+
+.home-page-link {
+  color: #000;
+}
+
+.ui.fluid.centered.card {
+  /* max-height: 40vh;
+  overflow: scroll; */
 }

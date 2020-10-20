@@ -1,5 +1,5 @@
-import { Link } from "react-router-dom";
-import React from 'react';
+import { Link, Redirect } from "react-router-dom";
+import React from "react";
 
 class LoginForm extends React.Component {
   state = {
@@ -10,9 +10,13 @@ class LoginForm extends React.Component {
   };
 
   handleOverlaySignin = () => {
-    this.setState({ active: "" });
+    this.props.handleError();
+    this.setState({ 
+      active: "",
+    });
   };
   handleOverlaySignup = () => {
+    this.props.handleError();
     this.setState({
       active: "right-panel-active",
     });
@@ -27,18 +31,18 @@ class LoginForm extends React.Component {
 
   handleSignin = (e) => {
     e.preventDefault();
-    this.props.handleLoginSubmit(this.state)
+    this.props.handleLoginSubmit(this.state);
     this.setState({
-      active: "",
       username: "",
       email: "",
       password: "",
-  })
-};
+    });
+  };
 
   render() {
     return (
       <div className="body">
+        {localStorage.token ? <Redirect to="/home" />  : null}
         <div
           className={`login-container ${this.state.active}`}
           id="login-container"
@@ -46,15 +50,16 @@ class LoginForm extends React.Component {
           <div className="form-container sign-up-container">
             <form onSubmit={this.handleSignin}>
               <h1 className="sign-in-font">Create Account</h1>
-              <input
-                type="text"
-                placeholder="Name"
-                autoComplete="off"
-                name="username"
-                value={this.state.username}
-                onChange={this.handleChange}
-                required
-              />
+              <div className="login-error">{this.props.error === "This email address is alredy being used" ? this.props.error : null}</div>
+                <input
+                  type="text"
+                  placeholder="Name"
+                  autoComplete="off"
+                  name="username"
+                  value={this.state.username}
+                  onChange={this.handleChange}
+                  required
+                />
 
               <input
                 type="email"
@@ -81,6 +86,7 @@ class LoginForm extends React.Component {
           <div className="form-container sign-in-container">
             <form onSubmit={this.handleSignin}>
               <h1 className="sign-in-font">Sign in</h1>
+              <div className="login-error" role="alert">{this.props.error=== "Incorrect email address/password" ? this.props.error : null}</div>
               <input
                 type="email"
                 placeholder="Email"
@@ -99,7 +105,7 @@ class LoginForm extends React.Component {
                 onChange={this.handleChange}
                 required
               />
-              <a href="#">Forgot your password?</a>
+              {/* <a href="#">Forgot your password?</a> */}
               <button className="loginform-button">Sign In</button>
             </form>
           </div>
