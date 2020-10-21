@@ -234,3 +234,13 @@ li .navBar-login-Text {
   /* max-height: 40vh;
   overflow: scroll; */
 }
+
+#upload-photo {
+  opacity: 0;
+  position: absolute;
+  z-index: -1;
+}
+
+label {
+  cursor: pointer;
+}

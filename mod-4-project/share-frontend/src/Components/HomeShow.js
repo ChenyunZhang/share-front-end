@@ -1,25 +1,40 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import PostForm from "./StatusPostForm";
 import SharedPosts from "./SharedPosts";
 import LeftNavBar from "./LeftNavBar";
 
 function HomeShow(props) {
   // console.log(props.userInfo);
-  const [posts, setPost] = useState([])
+  const [posts, setPost] = useState([]);
 
   useEffect(() => {
     fetch("http://localhost:3000/posts")
       .then((res) => res.json())
       .then((postsArr) => {
-        setPost(postsArr)
+        setPost(postsArr);
       });
   }, []);
 
-  let arrayofPosts = posts.map(post =>
-    <SharedPosts
-    key={post.id}
-    postObj={post}
-    />)
+  let addPost = (newPost) => {
+    let copyOfPost = [newPost, ...posts];
+    setPost(copyOfPost);
+  };
+
+  let deletePost = (deletedPostObj) => {
+    let copyOfPosts = posts.filter(postObj => {
+      return postObj.id !== deletedPostObj
+    })
+    setPost(copyOfPosts)
+  }
+
+  let arrayofPosts = posts.map((post) => (
+    <SharedPosts 
+    key={post.id} 
+    postObj={post} 
+    currentUser={props.userInfo}
+    deletePost={deletePost}
+    />
+  ));
 
   return (
     <>
@@ -29,7 +44,7 @@ function HomeShow(props) {
             <LeftNavBar userInfo={props.userInfo} />
           </div>
           <div className="eight wide column">
-            <PostForm />
+            <PostForm info={props.userInfo} addPost={addPost} />
             {arrayofPosts}
           </div>
 

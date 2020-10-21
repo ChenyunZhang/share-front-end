@@ -12,11 +12,11 @@ export class UserProfile extends Component {
                         <div className="eight wide column">
                             <form className="ui form">
                             <div className="field">
-                                <label>First Name</label>
+                                <label>username</label>
                                 <input type="text" name="first-name" placeholder="First Name"/>
                             </div>
                             <div className="field">
-                                <label>Last Name</label>
+                                <label>email</label>
                                 <input type="text" name="last-name" placeholder="Last Name"/>
                             </div>
                             <button className="ui button" type="submit">Submit</button>

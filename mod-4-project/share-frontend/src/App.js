@@ -100,6 +100,7 @@ class App extends React.Component {
       return (
         <UserHome
           username={this.state.username}
+          id={this.state.id}
           email={this.state.email}
           token={this.state.token}
           like={this.state.like}
@@ -117,6 +118,7 @@ class App extends React.Component {
       error: "",
     });
   };
+
 
   render() {
     return (
