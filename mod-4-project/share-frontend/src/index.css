@@ -223,11 +223,11 @@ li .navBar-login-Text {
 }
 
 .navbar-custom {
-  background-color: #cbb6d4;
+  background-color: #3b5998;
 }
 
 .home-page-link {
-  color: #000;
+  color: white;
 }
 
 .ui.fluid.centered.card {
@@ -243,4 +243,53 @@ li .navBar-login-Text {
 
 label {
   cursor: pointer;
+}
+
+.four.wide.column {
+  position: fixed;
+}
+
+.five.wide.column {
+  position: fixed;
+}
+
+.seven.wide.column {
+  height: 90vh;
+  overflow-y: scroll;
+}
+
+.seven.wide.column::-webkit-scrollbar {
+  display: none;
+}
+
+.trash.alternate.icon {
+  cursor: pointer;
+}
+
+.profile-image {
+  border-radius: 50%;
+  height: 200px;
+  width: 200px;
+}
+
+/* .card-image {
+  max-height: 500px;
+  overflow: hidden;
+} */
+
+.upload-button:hover {
+  color: rgba(26, 100, 143, 0.973);
+}
+
+.ui.centered.card.post {
+  width: 40vw;
+  /* height: 50vh; */
+}
+
+.ui.image.left-bar {
+  max-height: 250px;
+}
+
+.new-image {
+  max-height: 150px;
 }

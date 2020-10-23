@@ -8,8 +8,12 @@ export class UserHome extends Component {
   render() {
     return (
       <>
-        <Nav handleLogOut={this.props.handleLogOut} />
-        <Home userInfo={this.props} />
+        <Nav 
+        handleLogOut={this.props.handleLogOut} 
+        />
+        <Home
+        userInfo={this.props}
+        />
       </>
     );
   }
