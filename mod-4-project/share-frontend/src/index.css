@@ -9,7 +9,7 @@
 #Global,
 #Global-2 {
   /* infinity */
-  animation: arm 1.5s linear infinite;
+  animation: arm 2.5s linear infinite;
   transform-origin: center;
   transform-box: fill-box;
 }
@@ -223,11 +223,12 @@ li .navBar-login-Text {
 }
 
 .navbar-custom {
-  background-color: #3b5998;
+  background-color: #190433b6;
 }
 
 .home-page-link {
   color: white;
+  font-size: 1.3em;
 }
 
 .ui.fluid.centered.card {
@@ -254,7 +255,7 @@ label {
 }
 
 .seven.wide.column {
-  height: 90vh;
+  height: 85vh;
   overflow-y: scroll;
 }
 
@@ -272,10 +273,9 @@ label {
   width: 200px;
 }
 
-/* .card-image {
-  max-height: 500px;
-  overflow: hidden;
-} */
+.card-image {
+  border-radius: 3%;
+}
 
 .upload-button:hover {
   color: rgba(26, 100, 143, 0.973);
@@ -283,6 +283,7 @@ label {
 
 .ui.centered.card.post {
   width: 40vw;
+  padding: 0 1vw 0 1vw;
   /* height: 50vh; */
 }
 
@@ -292,4 +293,12 @@ label {
 
 .new-image {
   max-height: 150px;
+}
+
+.ui.blue.basic.label {
+  cursor: pointer;
+}
+
+.news-description {
+  text-transform: uppercase;
 }

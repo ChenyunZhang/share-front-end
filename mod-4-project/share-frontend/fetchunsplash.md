@@ -16,7 +16,7 @@ unsplash.search.photos("dogs", 1, 20, { orientation: "portrait", color: "green" 
 
     return (
         <div>
-            ji
+            
         </div>
     )
 }

@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import Comment from "./Comment";
 import CreateComment from "./CreateComment";
+import { Link } from "react-router-dom";
+import FollowButton from "./FollowButton";
+import UnFollowed from "./Unfollowed"
+
 // import Button from "react-bootstrap/Button";
 // import Modal from "react-bootstrap/Modal";
 
 function SharedPosts(props) {
-  // console.log(props)
   const handleLike = () => {
     if (props.like.every((l) => l.user_id !== props.currentUser.id)) {
       fetch("http://localhost:3000/likes", {
@@ -69,13 +72,38 @@ function SharedPosts(props) {
     />
   ));
 
+  // ###########################################################
+
+  let button;
+
+  // const [follow, setFollow] = useState();
+
+  const isFollowed = () =>{
+    if(props.postObj.user_id === props.currentUser.id){
+      return null
+    }else if(props.currentUser.followed.some(obj => obj.id === props.postObj.user_id)){
+      return button = <FollowButton
+      currentUser={props.currentUser}
+      postObj={props.postObj}
+      deleteFollower={props.deleteFollower}
+      />
+    }else{
+      return button = <UnFollowed 
+      currentUser={props.currentUser}
+      postObj={props.postObj}
+      addFollower={props.addFollower}
+      />
+    }
+  }
+
+
   // ########################################################################
 
   return (
     <>
       <div className="ui centered card post">
         <div className="content">
-          <div className="right floated meta">{props.postObj.created_time}</div>
+          {isFollowed()}
           <img className="ui avatar image" src={props.postObj.user.avatar} />
           {props.postObj.user.username}
         </div>
@@ -116,9 +144,8 @@ function SharedPosts(props) {
             addComment={props.addComment}
           />
         ) : null}
-        
-        {commentState ? arrayOfComment : null}
 
+        {commentState ? arrayOfComment : null}
       </div>
     </>
   );

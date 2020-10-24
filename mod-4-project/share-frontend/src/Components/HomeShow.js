@@ -3,11 +3,13 @@ import PostForm from "./StatusPostForm";
 import SharedPosts from "./SharedPosts";
 import LeftNavBar from "./LeftNavBar";
 import RightNavBar from "./RightNavBar";
+import Nav from "./NavBarLogIn";
 
 function HomeShow(props) {
   const [posts, setPost] = useState([]);
   const [likes, setLike] = useState([]);
   const [comments, setComment] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
 
   const url1 = "http://localhost:3000/posts";
   const url2 = "http://localhost:3000/likes";
@@ -21,7 +23,7 @@ function HomeShow(props) {
       .then((res) => {
         setPost(res[0]);
         setLike(res[1]);
-        setComment(res[2])
+        setComment(res[2]);
       });
   }, []);
 
@@ -53,7 +55,6 @@ function HomeShow(props) {
     setLike(copyOfLikes);
   };
 
-
   // ###################################################################################
   let addComment = (newComment) => {
     const newCommentArr = [newComment, ...comments];
@@ -68,7 +69,29 @@ function HomeShow(props) {
   };
 
   // ###################################################################################
-  let arrayofPosts = posts.map((post) => (
+  // const addFollower = (newRelationship) => {
+  //   const newRelationshipArr = [newRelationship, ...relationship];
+  //   setRelationship(newRelationshipArr);
+  // };
+
+  // const deleteFollower = (deleteRelationshipObj) => {
+  //   let copyOfRelationships = relationship.filter((relationshipObj) => {
+  //     return relationshipObj.followed_id !== deleteRelationshipObj.followed_id;
+  //   });
+  //   setComment(copyOfRelationships);
+  // };
+
+  // ###################################################################################
+  const changeSearchTerm = (newSearchTerm) => {
+    setSearchTerm(newSearchTerm);
+  };
+
+  let filteredPost = posts.filter((post) => {
+    if(post.content){
+      return post.user.username.toLowerCase().includes(searchTerm.toLowerCase()) || post.content.toLowerCase().includes(searchTerm.toLowerCase())
+  }});
+  // ###################################################################################
+  let arrayofPosts = filteredPost.map((post) => (
     <SharedPosts
       key={post.id}
       postObj={post}
@@ -78,30 +101,47 @@ function HomeShow(props) {
       deleteLike={deleteLike}
       addComment={addComment}
       deleteComment={deleteComment}
+      addFollower={props.addFollower}
+      deleteFollower={props.deleteFollower}
       comment={comments.filter((comment) => comment.post_id === post.id)}
       like={likes.filter((like) => like.post_id === post.id)}
     />
   ));
-
 
   // ##############################################################################
 
   // #########################################################################
   return (
     <>
+      <Nav
+        userInfo={props}
+        searchTerm={searchTerm}
+        handleLogOut={props.handleLogOut}
+        changeSearchTerm={changeSearchTerm}
+      />
       <div className="ui internally celled grid">
         <div className="row">
           <div className="four wide column">
-            <LeftNavBar userInfo={props.userInfo} likes={likes} posts={posts} />
+            <LeftNavBar
+              userInfo={props.userInfo}
+              likes={likes}
+              posts={posts}
+            />
           </div>
           <div className="seven wide column">
-            <PostForm info={props.userInfo} addPost={addPost} />
+            <PostForm 
+            info={props.userInfo}
+            addPost={addPost} />
             {arrayofPosts}
           </div>
 
           {/* third part */}
           <div className="five wide column">
-            <RightNavBar userInfo={props.userInfo} likes={likes} posts={posts} />
+            <RightNavBar
+              userInfo={props.userInfo}
+              likes={likes}
+              posts={posts}
+            />
           </div>
         </div>
       </div>

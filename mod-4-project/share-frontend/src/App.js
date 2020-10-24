@@ -5,7 +5,7 @@ import LoginForm from "./Components/LoginForm";
 import NotFound from "./Components/NotFound";
 import UserProfile from "./Components/UserProfile";
 import UserHome from "./Components/UserHome";
-
+import Followeds from "./Components/FollowedHouse";
 
 class App extends React.Component {
   state = {
@@ -16,7 +16,8 @@ class App extends React.Component {
     error: "",
     like: [],
     avatar: "",
-    follower: []
+    followed_people: [],
+    relationship_arr: [],
   };
 
   componentDidMount() {
@@ -71,17 +72,18 @@ class App extends React.Component {
       this.props.history.push("/login");
     } else {
       localStorage.token = resp.token;
-      // console.log(resp);
+      // console.log(resp.user)
       this.setState({
         id: resp.user.id,
         username: resp.user.username,
         email: resp.user.email,
         like: resp.user.likes,
-        follower: resp.user.followers,
+        followed_people: resp.user.followeds,
+        relationship_arr: resp.user.followers,
         token: resp.token,
         posts: resp.user.posts,
         error: "",
-        avatar: resp.user.avatar
+        avatar: resp.user.avatar,
       });
       this.props.history.push("/home");
     }
@@ -97,6 +99,57 @@ class App extends React.Component {
     localStorage.clear();
   };
 
+  getUser = () =>{
+    
+  }
+
+  // ###################################################################################
+  addFollower = (newRelationship) => {
+    // console.log(newRelationship.followed_id)
+    fetch("http://localhost:3000/users")
+      .then((r) => r.json())
+      .then((userArr) => {
+        const new_being_followed_user = userArr.filter(
+          (user) => user.id === newRelationship.followed_id
+        );
+
+        const new_followed_people_array = [
+          new_being_followed_user[0],
+          ...this.state.followed_people,
+        ];
+        this.setState({
+          followed_people: new_followed_people_array,
+        });
+      });
+
+    const newRelationshipArr = [
+      newRelationship,
+      ...this.state.relationship_arr,
+    ];
+    this.setState({
+      relationship_arr: newRelationshipArr,
+    });
+  };
+
+
+  deleteFollower = (deleteRelationshipObj) => {
+    console.log(deleteRelationshipObj)
+    fetch("http://localhost:3000/users")
+    .then((r) => r.json())
+    .then((userArr) => {
+      const new_being_followed_user = userArr.filter(
+        (user) => user.id === deleteRelationshipObj.followed_id
+      );
+
+      const remove_followed_person_array = this.state.followed_people.filter(followed_user =>
+        new_being_followed_user[0].id !== followed_user.id
+        )
+      console.log(remove_followed_person_array)
+      this.setState({
+        followed_people: remove_followed_person_array
+      });
+    });
+  };
 
   renderUserHome = () => {
     if (!!this.state.token) {
@@ -108,8 +161,11 @@ class App extends React.Component {
           token={this.state.token}
           avatar={this.state.avatar}
           like={this.state.like}
-          follower={this.state.follower}
+          followed={this.state.followed_people}
+          relationship={this.state.relationship_arr}
           handleLogOut={this.handleLogOut}
+          addFollower={this.addFollower}
+          deleteFollower={this.deleteFollower}
         />
       );
     } else {
@@ -127,9 +183,9 @@ class App extends React.Component {
     this.setState({
       username: updatedUser.username,
       email: updatedUser.email,
-      error: "Updated Successfully"
+      error: "Updated Successfully",
     });
-    alert("updated successfully")
+    alert("updated successfully");
   };
 
   render() {
@@ -137,6 +193,9 @@ class App extends React.Component {
       <Switch>
         <Route exact path="/">
           <HomepageImg />
+        </Route>
+        <Route exact path="/followeds">
+          <Followeds followed_people={this.state.followed_people} />
         </Route>
         <Route exact path="/home" render={this.renderUserHome} />
 
@@ -147,7 +206,7 @@ class App extends React.Component {
             email={this.state.email}
             token={this.state.token}
             error={this.state.error}
-            handleError ={this.handleError }
+            handleError={this.handleError}
             handleUserUpdate={this.handleUserUpdate}
           />
         </Route>
