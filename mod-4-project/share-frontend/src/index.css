@@ -6,10 +6,15 @@
   text-align: center;
 }
 
-#Global,
-#Global-2 {
+#Global {
   /* infinity */
-  animation: arm 2.5s linear infinite;
+  /* animation: arm 23s linear infinite;
+  transform-origin: center;
+  transform-box: fill-box; */
+}
+
+#Global:hover {
+  animation: arm 0.1s linear infinite;
   transform-origin: center;
   transform-box: fill-box;
 }
@@ -287,8 +292,22 @@ label {
   /* height: 50vh; */
 }
 
+.ui.centered.card.post:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+}
+
+.news-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+}
+
 .ui.image.left-bar {
   max-height: 250px;
+}
+
+.image.left-bar{
+  max-height: 350px;
 }
 
 .new-image {

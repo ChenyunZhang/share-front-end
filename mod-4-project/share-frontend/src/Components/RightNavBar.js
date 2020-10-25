@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import News from "./News"
 
 function RightNavBar() {
@@ -7,7 +7,7 @@ function RightNavBar() {
   return (
     <>
       <div>
-        <News />
+        {/* <News /> */}
       </div>
     </>
   );

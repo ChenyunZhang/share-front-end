@@ -6,6 +6,7 @@ import NotFound from "./Components/NotFound";
 import UserProfile from "./Components/UserProfile";
 import UserHome from "./Components/UserHome";
 import Followeds from "./Components/FollowedHouse";
+import Myposts from "./Components/MyPost"
 
 class App extends React.Component {
   state = {
@@ -16,8 +17,11 @@ class App extends React.Component {
     error: "",
     like: [],
     avatar: "",
+    location: "",
+    gender: "",
     followed_people: [],
     relationship_arr: [],
+    renderUser: null
   };
 
   componentDidMount() {
@@ -83,6 +87,8 @@ class App extends React.Component {
         token: resp.token,
         posts: resp.user.posts,
         error: "",
+        gender: resp.user.gender,
+        location: resp.user.location,
         avatar: resp.user.avatar,
       });
       this.props.history.push("/home");
@@ -133,7 +139,7 @@ class App extends React.Component {
 
 
   deleteFollower = (deleteRelationshipObj) => {
-    console.log(deleteRelationshipObj)
+    // console.log(deleteRelationshipObj)
     fetch("http://localhost:3000/users")
     .then((r) => r.json())
     .then((userArr) => {
@@ -144,7 +150,7 @@ class App extends React.Component {
       const remove_followed_person_array = this.state.followed_people.filter(followed_user =>
         new_being_followed_user[0].id !== followed_user.id
         )
-      console.log(remove_followed_person_array)
+      // console.log(remove_followed_person_array)
       this.setState({
         followed_people: remove_followed_person_array
       });
@@ -161,6 +167,8 @@ class App extends React.Component {
           token={this.state.token}
           avatar={this.state.avatar}
           like={this.state.like}
+          location={this.state.location}
+          gender={this.state.gender}
           followed={this.state.followed_people}
           relationship={this.state.relationship_arr}
           handleLogOut={this.handleLogOut}
@@ -180,13 +188,23 @@ class App extends React.Component {
   };
 
   handleUserUpdate = (updatedUser) => {
+    console.log(updatedUser)
     this.setState({
       username: updatedUser.username,
       email: updatedUser.email,
+      location: updatedUser.location,
+      gender: updatedUser.gender,
       error: "Updated Successfully",
     });
     alert("updated successfully");
   };
+
+  renderInfomation= (clicked) =>{
+    // console.log(clicked.user)
+    this.setState({
+      renderUser: clicked
+    })
+  }
 
   render() {
     return (
@@ -195,15 +213,37 @@ class App extends React.Component {
           <HomepageImg />
         </Route>
         <Route exact path="/followeds">
-          <Followeds followed_people={this.state.followed_people} />
+          <Followeds 
+          followed_people={this.state.followed_people} 
+          deleteFollower={this.deleteFollower}
+          currentUserName = {this.state.username}
+          relationship={this.state.relationship_arr}
+          renderUser={this.state.renderUser}
+          renderInfomation={this.renderInfomation}
+          />
         </Route>
         <Route exact path="/home" render={this.renderUserHome} />
-
+        <Route exact path="/myposts">
+          <Myposts
+            username={this.state.username}
+            id={this.state.id}
+            email={this.state.email}
+            token={this.state.token}
+            avatar={this.state.avatar}
+            like={this.state.like}
+            location={this.state.location}
+            followed={this.state.followed_people}
+            relationship={this.state.relationship_arr}
+           />
+        </Route>
+        
         <Route exact path="/profile">
           <UserProfile
             username={this.state.username}
             id={this.state.id}
+            location={this.state.location}
             email={this.state.email}
+            gender={this.state.gender}
             token={this.state.token}
             error={this.state.error}
             handleError={this.handleError}

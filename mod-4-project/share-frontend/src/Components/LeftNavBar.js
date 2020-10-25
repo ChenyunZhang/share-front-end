@@ -1,25 +1,39 @@
 import React from "react";
-import Followers from "./FollowedHouse";
 import { Link } from "react-router-dom";
 import Today from "./TodayInHistory";
+import GenderNotosay from "./GenderNotosay";
+import She from "./GenderShe";
+import He from "./GenderHe";
+import They from "./GenderThey";
 
 function LeftNavBar(props) {
-  // console.log(props.userInfo.followed);
-  // const arrayOfFollowers = props.userInfo.followed.map((followedObj) => (
-  //   <Followers key={followedObj.id} followed={followedObj} />
-  // ));
+  // console.log(props.userInfo)
+  let gender;
+  if (props.userInfo.gender === "She/her") {
+    gender = <She userInfo={props.userInfo} />;
+  } else if (props.userInfo.gender === "He/him") {
+    gender = <He userInfo={props.userInfo} />;
+  } else if (props.userInfo.gender === "They/them") {
+    gender = <They userInfo={props.userInfo} />;
+  } else {
+    gender = <GenderNotosay userInfo={props.userInfo} />;
+  }
 
   return (
     <>
       <div className="ui divided items">
-        <Today />
+        {/* <Today /> */}
         <hr />
-        <div className="content">
+        <div className="content news-item">
           <div className="ui segment">
             <div className="ui centered card">
               <img
                 className="ui image left-bar"
-                src={props.userInfo.avatar}
+                src={
+                  props.userInfo.avatar
+                    ? props.userInfo.avatar
+                    : "https://images.unsplash.com/photo-1505628346881-b72b27e84530?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
+                }
               ></img>
               <div className="content">
                 <div className="ui two buttons">
@@ -60,19 +74,18 @@ function LeftNavBar(props) {
 
                   <div className="item">
                     <i className="marker icon"></i>
-                    <div className="content"> New York, NY</div>
+                    <div className="content">
+                      {props.userInfo.location
+                        ? props.userInfo.location
+                        : "Mars"}
+                    </div>
                   </div>
+
+                  {gender}
 
                   <div className="item">
                     <i className="mail icon"></i>
                     <div className="content">{props.userInfo.email}</div>
-                  </div>
-
-                  <div className="item">
-                    <i className="linkify icon"></i>
-                    <div className="content">
-                      <div>Share.com</div>
-                    </div>
                   </div>
 
                   <div className="item">

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
 
 function NavBarLogIn(props) {
@@ -18,6 +18,7 @@ function NavBarLogIn(props) {
 						<Link className="dropdown-toggle home-page-link" data-toggle="dropdown" id="dropdownMenu1" data-toggle="dropdown" to="/home">Account</Link>
 						<div className="dropdown-menu">
 							<li><Link className="dropdown-item home-page-link" to="/profile">Edit profile</Link></li>
+                            <li><Link className="dropdown-item home-page-link" to="/myposts">My posts</Link></li>
 						</div>
 					</li>
                 </ul>
@@ -30,7 +31,7 @@ function NavBarLogIn(props) {
                         autoComplete="off"
                         value={props.searchTerm}
                         onChange={handleSearch}
-                        placeholder="Search" />
+                        placeholder="Search Share" />
                     </div>
                     </div>
                 <ul className="nav navbar-nav navbar-right">

@@ -6,7 +6,7 @@ function Subnews(props) {
   return (
     <>
       <div className="ui segment">
-        <div className="ui divided items">
+        <div className="ui divided items news-item">
           <div className="item">
             <div className="content">
               <a className="header" href={props.url} target="_blank">
@@ -15,9 +15,9 @@ function Subnews(props) {
               <div className="meta news-description">
                 <span>{props.description}</span>
               </div>
-              <div className="description">
-                <p></p>
-              </div>
+              {/* <div className="meta description news-description">
+                <p>{props.description}</p>
+              </div> */}
                 <div className="extra">{props.published_date}</div>
             </div>
             <div className="image ">

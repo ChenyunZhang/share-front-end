@@ -52,6 +52,7 @@ function StatusPostForm(props) {
           rows="6"
           name="post"
           value={post}
+          className="news-item"
           onChange={(e) => setPost(e.target.value)}
           required
         />
