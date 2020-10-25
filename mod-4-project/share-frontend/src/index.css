@@ -306,8 +306,10 @@ label {
   max-height: 250px;
 }
 
-.image.left-bar{
-  max-height: 350px;
+.followed-user-profile-image{
+  height: 200px;
+  width: 200px;
+  border-radius: 50%;
 }
 
 .new-image {
@@ -321,3 +323,8 @@ label {
 .news-description {
   text-transform: uppercase;
 }
+
+.followed-user-profile{
+  border: none;
+}
+

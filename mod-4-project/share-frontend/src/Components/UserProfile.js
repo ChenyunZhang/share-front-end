@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Nav from "./NavBarLogIn";
+import Nav from "./NavBarNotHome"
 
 function UserProfile(props) {
   const [username, setUsername] = useState(props.username);
@@ -29,7 +29,7 @@ function UserProfile(props) {
 
   return (
     <>
-      <Nav />
+      <Nav props={props}/>
       <div className="ui internally celled grid">
         <div className="row">
           <div className="four wide column"></div>

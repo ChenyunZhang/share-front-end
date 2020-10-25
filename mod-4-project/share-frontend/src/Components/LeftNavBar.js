@@ -22,7 +22,7 @@ function LeftNavBar(props) {
   return (
     <>
       <div className="ui divided items">
-        {/* <Today /> */}
+        <Today />
         <hr />
         <div className="content news-item">
           <div className="ui segment">
@@ -37,7 +37,7 @@ function LeftNavBar(props) {
               ></img>
               <div className="content">
                 <div className="ui two buttons">
-                  <Link className="ui labeled button" tabIndex="0" to="/">
+                  <Link className="ui labeled button" tabIndex="0" to="/myposts">
                     <div className="ui violet button">
                       <i className="heart icon"></i> Post:{" "}
                     </div>

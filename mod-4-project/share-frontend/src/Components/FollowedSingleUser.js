@@ -2,13 +2,13 @@ import React from "react";
 import FollowedPagebutton from "./FollowedPagebutton";
 
 function FollowedSingleUser(props) {
-  const handleClick = () => {
-    props.renderInfomation(props)
-  };
+  // const handleClick = () => {
+  //   props.renderInfomation(props)
+  // };
 
   return (
     <>
-      <div className="ui card fluid news-item" onClick={handleClick}>
+      <div className="ui card fluid news-item">
         <div className="content">
           <div className="right floated meta">
             <FollowedPagebutton
@@ -19,6 +19,7 @@ function FollowedSingleUser(props) {
             />
           </div>
           <img
+          // onClick={handleClick}
             className="ui avatar image"
             src={
               props.user.avatar

@@ -3,7 +3,7 @@ import Comment from "./Comment";
 import CreateComment from "./CreateComment";
 import { Link } from "react-router-dom";
 import FollowButton from "./FollowButton";
-import UnFollowed from "./Unfollowed"
+import UnFollowed from "./Unfollowed";
 
 // import Button from "react-bootstrap/Button";
 // import Modal from "react-bootstrap/Modal";
@@ -52,7 +52,7 @@ function SharedPosts(props) {
     })
       .then((res) => res.json())
       .then((deletedObj) => {
-        props.deletePost(deletedObj.id);
+        props.deletePost(deletedObj);
       });
   };
   // ########################################################################
@@ -78,24 +78,29 @@ function SharedPosts(props) {
 
   // const [follow, setFollow] = useState();
 
-  const isFollowed = () =>{
-    if(props.postObj.user_id === props.currentUser.id){
-      return null
-    }else if(props.currentUser.followed.some(obj => obj.id === props.postObj.user_id)){
-      return button = <FollowButton
-      currentUser={props.currentUser}
-      postObj={props.postObj}
-      deleteFollower={props.deleteFollower}
-      />
-    }else{
-      return button = <UnFollowed 
-      currentUser={props.currentUser}
-      postObj={props.postObj}
-      addFollower={props.addFollower}
-      />
+  const isFollowed = () => {
+    if (props.postObj.user_id === props.currentUser.id) {
+      return null;
+    } else if (
+      props.currentUser.followed.some((obj) => obj.id === props.postObj.user_id)
+    ) {
+      return (button = (
+        <FollowButton
+          currentUser={props.currentUser}
+          postObj={props.postObj}
+          deleteFollower={props.deleteFollower}
+        />
+      ));
+    } else {
+      return (button = (
+        <UnFollowed
+          currentUser={props.currentUser}
+          postObj={props.postObj}
+          addFollower={props.addFollower}
+        />
+      ));
     }
-  }
-
+  };
 
   // ########################################################################
 
@@ -104,7 +109,14 @@ function SharedPosts(props) {
       <div className="ui centered card post">
         <div className="content">
           {isFollowed()}
-          <img className="ui avatar image" src={props.postObj.user.avatar ? props.postObj.user.avatar : "https://images.unsplash.com/photo-1505628346881-b72b27e84530?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"} />
+          <img
+            className="ui avatar image"
+            src={
+              props.postObj.user.avatar
+                ? props.postObj.user.avatar
+                : "https://images.unsplash.com/photo-1505628346881-b72b27e84530?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
+            }
+          />
           {props.postObj.user.username}
         </div>
         <div className="image card-image">
@@ -113,7 +125,10 @@ function SharedPosts(props) {
         <div className="content">
           <div className="right floated">
             {props.postObj.user.id === props.currentUser.id ? (
-              <i className="trash alternate icon" onClick={handlePostClick}></i>
+              <i
+                className="trash alternate outline icon"
+                onClick={handlePostClick}
+              ></i>
             ) : null}
           </div>
           <div className="header">{props.postObj.content}</div>
@@ -121,7 +136,7 @@ function SharedPosts(props) {
         <div className="content">
           <span className="right floated">
             <i
-              className={`heart ike icon
+              className={`red heart ike icon
             ${
               props.like.some(
                 (likeobj) => likeobj.user_id === props.currentUser.id
@@ -134,7 +149,7 @@ function SharedPosts(props) {
             ></i>
             {`${props.like.length} ${props.like.length > 1 ? "likes" : "like"}`}
           </span>
-          <i className="comment icon" onClick={handleComment}></i>
+          <i className="comment outline icon" onClick={handleComment}></i>
           {`${props.comment.length} comments`}
         </div>
         {commentState ? (

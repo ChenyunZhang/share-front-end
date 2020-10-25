@@ -19,6 +19,8 @@ class App extends React.Component {
     avatar: "",
     location: "",
     gender: "",
+    posts:[],
+    search: "",
     followed_people: [],
     relationship_arr: [],
     renderUser: null
@@ -87,6 +89,7 @@ class App extends React.Component {
         token: resp.token,
         posts: resp.user.posts,
         error: "",
+        post: resp.user.posts,
         gender: resp.user.gender,
         location: resp.user.location,
         avatar: resp.user.avatar,
@@ -188,7 +191,7 @@ class App extends React.Component {
   };
 
   handleUserUpdate = (updatedUser) => {
-    console.log(updatedUser)
+    // console.log(updatedUser)
     this.setState({
       username: updatedUser.username,
       email: updatedUser.email,
@@ -199,12 +202,20 @@ class App extends React.Component {
     alert("updated successfully");
   };
 
-  renderInfomation= (clicked) =>{
-    // console.log(clicked.user)
+  // renderInfomation= (clicked) =>{
+  //   console.log(clicked.user)
+  //   this.setState({
+  //     renderUser: clicked
+  //   })
+  // }
+
+  changeSearchTerm = (newSearchTerm) => {
     this.setState({
-      renderUser: clicked
+      search: newSearchTerm
     })
-  }
+  };
+
+
 
   render() {
     return (
@@ -218,8 +229,11 @@ class App extends React.Component {
           deleteFollower={this.deleteFollower}
           currentUserName = {this.state.username}
           relationship={this.state.relationship_arr}
-          renderUser={this.state.renderUser}
-          renderInfomation={this.renderInfomation}
+          changeSearchTerm={this.changeSearchTerm}
+          search={this.state.search}
+          handleLogOut={this.handleLogOut}
+          // renderUser={this.state.renderUser}
+          // renderInfomation={this.renderInfomation}
           />
         </Route>
         <Route exact path="/home" render={this.renderUserHome} />
@@ -231,6 +245,8 @@ class App extends React.Component {
             token={this.state.token}
             avatar={this.state.avatar}
             like={this.state.like}
+            posts={this.state.posts}
+            handleLogOut={this.handleLogOut}
             location={this.state.location}
             followed={this.state.followed_people}
             relationship={this.state.relationship_arr}
@@ -247,6 +263,7 @@ class App extends React.Component {
             token={this.state.token}
             error={this.state.error}
             handleError={this.handleError}
+            handleLogOut={this.handleLogOut}
             handleUserUpdate={this.handleUserUpdate}
           />
         </Route>

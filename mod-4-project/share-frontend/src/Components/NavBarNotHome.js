@@ -3,10 +3,6 @@ import { Link } from 'react-router-dom'
 
 function NavBarLogIn(props) {
 
-    const handleSearch = (e) =>{
-        e.preventDefault()
-        props.changeSearchTerm(e.target.value)
-    }
         return (
            <>
            <nav className="navbar navbar-fixed-top navbar-custom">
@@ -22,20 +18,8 @@ function NavBarLogIn(props) {
 						</div>
 					</li>
                 </ul>
-                    <div className="navbar-form navbar-left">
-                    <div className="form-group">
-                        <input 
-                        type="text" 
-                        className="btn btn-default"
-                        name="search"
-                        autoComplete="off"
-                        value={props.searchTerm}
-                        onChange={handleSearch}
-                        placeholder="Search Share" />
-                    </div>
-                    </div>
                 <ul className="nav navbar-nav navbar-right">
-                <li><Link to="/" onClick={props.handleLogOut} className="home-page-link"><span className="glyphicon glyphicon-log-in"></span> Logout</Link></li>
+                <li><Link to="/" onClick={props.props.handleLogOut} className="home-page-link"><span className="glyphicon glyphicon-log-in"></span> Logout</Link></li>
                 </ul>
             </div>
             </nav>

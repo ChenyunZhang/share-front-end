@@ -1,11 +1,11 @@
 import React from 'react'
 import Nav from "./NavBarLogIn"
 
-function MyPost() {
+function MyPost(props) {
+    console.log(props)
     return (
         <div>
             <Nav />
-            under construction
         </div>
     )
 }

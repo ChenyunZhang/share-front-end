@@ -36,14 +36,17 @@ function HomeShow(props) {
 
   let deletePost = (deletedPostObj) => {
     let copyOfPosts = posts.filter((postObj) => {
-      return postObj.id !== deletedPostObj;
+      return postObj.id !== deletedPostObj.id;
     });
+    const likeObjj = likes.filter((likeObj) => likeObj.post.id === deletedPostObj.id)
+    if(!!likeObjj[0]){
+      deleteLike(likeObjj[0])
+    }
     setPost(copyOfPosts);
   };
 
   // ################################################################################
   let addLike = (newLike) => {
-    // console.log(likes);
     const newLikeArr = [...likes, newLike];
     setLike(newLikeArr);
   };

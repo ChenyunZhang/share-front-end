@@ -7,7 +7,7 @@ function RightNavBar() {
   return (
     <>
       <div>
-        {/* <News /> */}
+        <News />
       </div>
     </>
   );

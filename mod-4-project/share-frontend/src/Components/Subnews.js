@@ -5,8 +5,8 @@ function Subnews(props) {
 //   console.log(props);
   return (
     <>
-      <div className="ui segment">
-        <div className="ui divided items news-item">
+      <div className="ui segment news-item">
+        <div className="ui divided items">
           <div className="item">
             <div className="content">
               <a className="header" href={props.url} target="_blank">

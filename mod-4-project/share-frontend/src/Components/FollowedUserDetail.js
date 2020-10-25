@@ -20,19 +20,24 @@ function FollowedUserDetail(props) {
 
   return (
     <>
-      <div class="ui cards">
-        <div class="ui centered card ">
-          <div class="image circular">
-            <img className="followed-user-profile-image" src={currentUser.avatar} />
+      <div class="ui cards stackable followed-user-profile">
+        {/* <div class="ui centered card"> */}
+          <div class="image followed-user-profile-image">
+            <img className="image followed-user-profile-image centered" src={currentUser.avatar} />
           </div>
-        </div>
+        {/* </div> */}
 
-        <div class="ui card fluid">
-          <div class="ui segment">
-            <p> <i className="mail icon"></i> {currentUser.email} </p>
-            <p> <i className="marker icon"></i>{currentUser.location} </p>
-            <p>  <i class="pencil alternate icon"></i>{`${postArr.length} posts`} </p>
-          </div>
+        <div class="ui card followed-user-profile">
+          {/* <div class="ui segment"> */}
+          <div className="content">
+          <p></p>
+          <p></p>
+            <p> <i className="mail icon"></i>Email: {currentUser.email} </p>
+            <p> <i className="marker icon"></i>Location: {currentUser.location} </p>
+            <p>  <i class="pencil alternate icon"></i>Posts: {`${postArr.length} posts`} </p>
+            <p>  <i class="user secret icon"></i>Gender: {currentUser.gender} </p>
+          {/* </div> */}
+        </div>
         </div>
         {/* <div class="content">
             <div class="header">{currentUser.username}</div>
