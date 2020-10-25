@@ -47,7 +47,7 @@ function SharedPosts(props) {
     : null;
 
   const handlePostClick = () => {
-    fetch(`http://localhost:3000/posts/${props.postObj.id}`, {
+    fetch(`https://share-backend-app.herokuapp.com/posts/${props.postObj.id}`, {
       method: "DELETE",
     })
       .then((res) => res.json())

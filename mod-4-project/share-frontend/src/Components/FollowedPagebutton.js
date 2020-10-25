@@ -5,7 +5,7 @@ function FollowedPagebutton(props) {
 
   const handleFollow = () => {
     const relationshipObj = props.relationship.filter(relationshipObj => relationshipObj.followed_id === props.user.id)[0]
-    fetch(`http://localhost:3000/relationships/${relationshipObj.id}`, {
+    fetch(`https://share-backend-app.herokuapp.com/relationships/${relationshipObj.id}`, {
       method: "DELETE",
     })
       .then((res) => res.json())

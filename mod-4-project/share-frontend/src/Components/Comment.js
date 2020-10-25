@@ -5,7 +5,7 @@ import React from "react";
 function Comment(props) {
   // console.log(props)
   const handleCommentDelete = () => {
-      fetch(`http://localhost:3000/comments/${props.comment.id}`, {
+      fetch(`https://share-backend-app.herokuapp.com/comments/${props.comment.id}`, {
         method: "DELETE",
       })
         .then((res) => res.json())
